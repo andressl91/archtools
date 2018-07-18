@@ -1,0 +1,112 @@
+# For ideas about how to modify the conky conf, please see:
+# https://github.com/Toory/Conky-config
+#
+##############################################
+#  Settings
+##############################################
+alignment top_right
+background yes
+border_width 1
+color0 0077FF 
+color1 991F00 
+color2 0000FF 
+color3 eb91df 
+color4 f2c55a 
+color5 a7f0e3
+cpu_avg_samples 2
+default_color white
+default_outline_color green
+default_shade_color red
+double_buffer yes
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 0
+gap_y 25
+maximum_width 200
+minimum_size 0 0
+no_buffers yes
+override_utf8_locale no
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_type normal
+own_window yes
+total_run_times 0
+update_interval 2
+uppercase no
+use_spacer right
+use_xft yes
+xftalpha 0.8
+xftfont  Inconsolata:size=8
+own_window_argb_value 0
+own_window_argb_visual no
+own_window_colour 000000
+
+
+
+TEXT
+
+##############################################
+#DATE
+##############################################
+${image ~/images/wallpaper/arch_logo.png -f 10 -p 0,40 -s 48x48 -n }
+${color0}${font sans-serif:bold:size=8}DATE ${hr 2}$color
+${offset 100}${voffset 10}${alignc}${font Trebuchet MS:size=24}${time %H:%M}${font}
+${offset 100}${alignc}${time %a %d %b %Y}
+
+##############################################
+#SYSTEM
+##############################################
+${color0}${font sans-serif:bold:size=8}SYSTEM ${hr 2}$color
+${font sans-serif:normal:size=8}$sysname $kernel $alignr $machine
+Packages: $alignr${execi 1.0 pacman -Q | wc --lines}
+
+##############################################
+#CPU
+##############################################
+${color0}${font sans-serif:bold:size=8}CPU ${hr 2}$color
+${font sans-serif:normal:size=8}${execi 600 lshw | grep CPU | grep product | awk {'print $2 $4 $6 $7'}}
+${font sans-serif:normal:size=8}${cpugraph cpu1 cpu2 cpu3 cpu4 33ffff 0000ff}
+${font sans-serif:normal:size=8}Core1: ${freq 1} Mhz $alignr T: $color ${exec sensors|grep 'Core 0'|awk '{print $3}' | cut -d "." -f 1} C
+${cpu cpu1}%  ${offset 5}${color1} ${cpubar cpu1}$color
+${font sans-serif:normal:size=8}Core2: ${freq 2} Mhz $alignr T: $color ${exec sensors|grep 'Core 1'|awk '{print $3}' | cut -d "." -f 1} C
+${cpu cpu2}%  ${offset 5} ${color1} ${cpubar cpu2}$color
+${font sans-serif:normal:size=8}Core3: ${freq 3} Mhz 
+${cpu cpu3}%  ${offset 5} ${color1} ${cpubar cpu3}$color
+${font sans-serif:normal:size=8}Core4: ${freq 4} Mhz  
+${cpu cpu4}%  ${offset 5} ${color1} ${cpubar cpu4}$color
+
+${top name 1}${alignr}${top cpu 1} %
+${top name 2}${alignr}${top cpu 2} %
+${top name 3}${alignr}${top cpu 3} %
+
+##############################################
+#MEMORY
+##############################################
+
+${color0}${font sans-serif:bold:size=8}MEMORY ${hr 2}$color
+${font sans-serif:normal:size=8}Ram: $alignc $mem / $memmax $alignr $memperc%
+$membar
+${top_mem name 1}${alignr}${top mem 1} %
+${top_mem name 2}${alignr}${top mem 2} %
+${top_mem name 3}${alignr}${top mem 3} %
+
+##############################################
+#DISK
+##############################################
+${color0}${font sans-serif:bold:size=8}DISK ${hr 2}$color
+${color3}${font sans-serif:normal:size=8} / $alignc ${fs_used /} / ${fs_size /} $alignr ${fs_used_perc /}%
+${fs_bar /}$color
+
+##############################################
+#NETWORK
+##############################################
+${color0}${font sans-serif:bold:size=8}NETWORK ${hr 2}$color
+${font sans-serif:normal:size=8}PRIVATE IP: 	$alignr${addr wlp0s20u2}
+${downspeedgraph wlp0s20u2 99cc33 006600}
+Down: $alignc ${downspeed wlp0s20u2}/s $alignr tot: ${totaldown wlp0s20u2}
+${upspeedgraph wlp0s20u2  ffcc00 ff0000}
+Up: $alignc ${upspeed wlp0s20u2}/s $alignr tot: ${totalup wlp0s20u2}
+
+

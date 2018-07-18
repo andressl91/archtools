@@ -1,0 +1,1 @@
+put config in .config/openbox/autostart 
