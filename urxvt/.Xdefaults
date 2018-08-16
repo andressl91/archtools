@@ -1,0 +1,12 @@
+URxvt.font:  xft:DejaVu Sans Mono:pixelsize=28:antialias=true:hinting=true
+URxvt.boldFont:  xft:DejaVu Sans Mono:bold:pixelsize=28:antialias=true:hinting=true
+URxvt.geometry: 90x65
+URxvt.background: black
+URxvt.foreground: white
+URxvt.cursorColor: white
+URxvt.cursorBlink: false
+URxvt.scrollBar: false
+URxvt.scrollStyle: rxvt
+URxvt.scrollBar_right: false
+URxvt.saveLines: 5000
+URxvt.transparent: true
