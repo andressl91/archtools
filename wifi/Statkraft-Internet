@@ -1,0 +1,24 @@
+[wifi-security]
+key-mgmt=wpa-eap
+
+[connection]
+id=YOUR ID
+uuid=2284e87e-b5d1-4dab-bc10-667ae595925
+type=wifi
+
+[ipv6]
+method=auto
+
+[wifi]
+ssid=SSID
+mode=infrastructure
+security=802-11-wireless-security
+
+[802-1x]
+eap=peap
+identity=IDENTITY
+phase2-auth=mschapv2
+password=PASSWORD
+
+[ipv4]
+method=auto

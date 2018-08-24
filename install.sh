@@ -19,7 +19,6 @@ vim +PluginInstall +qall
 youcompleteme_install=$HOME/.vim/bundle/YouCompleteMe/install.py
 python $youcompleteme_install
 
-
 # Openbox stuff
 echo COPYING OPENBOX CONFIG FILE TO $HOME/.config
 cp -r $install_folder/openbox $HOME/.config/
@@ -28,3 +27,9 @@ cp -r $install_folder/openbox $HOME/.config/
 echo COPYING URXVT CONFIG FILE TO $HOME/.Xdefaults
 cp -r $install_folder/urxvt/.Xdefaults $HOME/
 
+# bash
+cp $install_folder/bash/.bashrc $HOME/
+
+
+# pypi packages
+sudo pip install cookiecutter
