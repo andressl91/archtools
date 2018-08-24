@@ -165,3 +165,6 @@ xorg-xwininfo
 xorg-xwud
 xz
 zip
+perl
+xsel
+

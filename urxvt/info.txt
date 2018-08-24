@@ -1,1 +1,3 @@
 Put hidden .Xdefaults on ~/
+IF YOU SEE CREATED FILES IN HOME, PERL EXTENSIONS 
+same for .urxvt
