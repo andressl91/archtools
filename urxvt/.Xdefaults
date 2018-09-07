@@ -13,7 +13,7 @@ URxvt.transparent: true
 
 !! Pearl extensions
 URxvt.perl-lib: /home/jackal/.urxvt/etc
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,font-size, fullscrean
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,font-size, fullscreen
 URxvt.url-select.launcher:  chromium
 URxvt.url-select.underline: true
 URxvt.keysym.M-u:           perl:url-select:select_next
@@ -27,9 +27,12 @@ URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.keysym.C-equal:  font-size:reset
 URxvt.keysym.C-slash:  font-size:show
 
+!! MIGHT GIVE EXTRA SLASH, CONSIDER DELETE
+!!URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,font-size, fullscreen
+URxvt.url-select.launcher:  chromium
 URxvt.keysym.M-c:   perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+!!URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 URxvt.clipboard.autocopy: true
 
-URxvt.keysym.F11: perl:fullscreen:switch
+URxvt.keysym.C-S-F: perl:fullscreen:switch
