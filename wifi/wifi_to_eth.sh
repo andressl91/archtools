@@ -12,13 +12,13 @@
 # Don't forget to change the name of network interface
 # Check them with `ifconfig`
 
-ip_address="192.168.2.5"
+ip_address="192.168.20.8"
 netmask="255.255.255.0"
-dhcp_range_start="192.168.2.2"
-dhcp_range_end="192.168.2.100"
+dhcp_range_start="192.168.20.2"
+dhcp_range_end="192.168.20.100"
 dhcp_time="12h"
-eth="eth0"
-wlan="wlan0"
+eth="enp62s0u1"
+wlan="wlp2s0"
 
 sudo iptables -F
 sudo iptables -t nat -F
