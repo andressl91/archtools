@@ -12,7 +12,7 @@ URxvt.saveLines: 5000
 URxvt.transparent: true
 
 !! Pearl extensions
-URxvt.perl-lib: /home/jackal/.urxvt/etc
+URxvt.perl-lib: /home/jackal/.urxvt/etx
 URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,font-size, fullscreen
 URxvt.url-select.launcher:  chromium
 URxvt.url-select.underline: true
