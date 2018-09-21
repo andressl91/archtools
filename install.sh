@@ -33,11 +33,12 @@ cp $install_folder/bash/.bashrc $HOME/
 
 
 # pypi packages
-sudo pip install cookiecutter
+pip install cookiecutter
 
 
 # VPN
-pacman -S openvn
-cp ${install_folder}/openvpn/update-resolv-conf /etc/openvpn/
+sudo pacman -S openvn
+mkdir -p /etc/openvpn/
+sudo cp ${install_folder}/openvpn/update-resolv-conf /etc/openvpn/
 echo proceed to download .conf file for your VPN and add 
 cat ${install_folder}/openvpn/install.sh 
