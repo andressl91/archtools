@@ -5,21 +5,28 @@ install_folder=$(dirname $(readlink -f $0))
 
 pacman_install=$install_folder/pacman
 
+# Python
+sudo pacman -S python
+sudo pacman -S python-pip
 
-sudo pacman -S --needed - < $pacman_install/package_list.txt
+
 # Vim stuff
+sudo pacman -S vim
+sudo pacman -S cmake
 echo COPYING VIM CONFIG TO $HOME/.vimrc
 cp $install_folder/vim/.vimrc $HOME/
+echo INSTALLING Vundle with Plugins
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-pip install flake8
-echo COPYING OLD-HOPE COLOR TO VIM CONFIG
 cp -rf $install_folder/vim/autoload $HOME/.vim/
 cp -rf $install_folder/vim/colors $HOME/.vim/
+pip install flake8
+echo COPYING OLD-HOPE COLOR TO VIM CONFIG
 vim +PluginInstall +qall
 youcompleteme_install=$HOME/.vim/bundle/YouCompleteMe/install.py
 python $youcompleteme_install
 
 # Openbox stuff
+sudo pacman -S openbox openbox-session
 echo COPYING OPENBOX CONFIG FILE TO $HOME/.config
 cp -r $install_folder/openbox $HOME/.config/
 
