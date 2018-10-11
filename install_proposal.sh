@@ -26,7 +26,7 @@ youcompleteme_install=$HOME/.vim/bundle/YouCompleteMe/install.py
 python $youcompleteme_install
 
 # Openbox stuff
-sudo pacman -S openbox openbox-session
+sudo pacman -S openboxn
 echo COPYING OPENBOX CONFIG FILE TO $HOME/.config
 cp -r $install_folder/openbox $HOME/.config/
 

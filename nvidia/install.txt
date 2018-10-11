@@ -1,0 +1,4 @@
+# install nvidia driver following arch wiki
+# Rember to start daemon nvidia-persistance
+
+# Remember bumblebee for running GPU 
