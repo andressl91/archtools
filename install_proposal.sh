@@ -8,7 +8,10 @@ pacman_install=$install_folder/pacman
 # Python
 sudo pacman -S python
 sudo pacman -S python-pip
-
+# pypi packages
+pip install virtualenv
+pip install numpy
+pip install cookiecutter
 
 # Vim stuff
 sudo pacman -S vim
@@ -34,13 +37,11 @@ cp -r $install_folder/openbox $HOME/.config/
 echo COPYING URXVT CONFIG FILE TO $HOME/.Xdefaults
 cp -r $install_folder/urxvt/.Xdefaults $HOME/
 mkdir -p $HOME/.urxvt/etx && cp $install_folder/urxvt/scripts/* $HOME/.urxvt/etx
+# xsel needed for terminal clipboard https://aur.archlinux.org/packages/xsel-git/
+# Last installed with command: makepkg -Acis --noprepare
 
 # bash
 cp $install_folder/bash/.bashrc $HOME/
-
-
-# pypi packages
-pip install cookiecutter
 
 
 # VPN
