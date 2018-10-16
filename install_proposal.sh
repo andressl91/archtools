@@ -40,6 +40,10 @@ mkdir -p $HOME/.urxvt/etx && cp $install_folder/urxvt/scripts/* $HOME/.urxvt/etx
 # xsel needed for terminal clipboard https://aur.archlinux.org/packages/xsel-git/
 # Last installed with command: makepkg -Acis --noprepare
 
+sudo pamcan -S i3 i3status
+sudo pacman -S dmenu
+sudo pacman -S glances
+
 # bash
 cp $install_folder/bash/.bashrc $HOME/
 
