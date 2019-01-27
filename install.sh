@@ -15,7 +15,6 @@ pip install flake8
 echo COPYING OLD-HOPE COLOR TO VIM CONFIG
 cp -rf $install_folder/vim/autoload $HOME/.vim/
 cp -rf $install_folder/vim/colors $HOME/.vim/
-cp -rf $install_folder/vim/.ycm_extra_conf.py $HOME/.vim/
 vim +PluginInstall +qall
 youcompleteme_install=$HOME/.vim/bundle/YouCompleteMe/install.py
 # python $youcompleteme_install
