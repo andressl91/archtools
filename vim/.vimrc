@@ -75,8 +75,23 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix |
     \ set encoding=utf-8
 
+" C++ specific
+au BufNewFile,BufRead *.cpp
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+    \ set encoding=utf-8 |
+    \ set colorcolumn=110 |
+    \ highlight ColorColumn ctermbg=darkgray
+
 " Youcompleteme
 let g:ycm_autoclose_preview_window_after_completion=1
+" Set  global conf for C++ autocomplete
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
