@@ -17,7 +17,7 @@ cp -rf $install_folder/vim/autoload $HOME/.vim/
 cp -rf $install_folder/vim/colors $HOME/.vim/
 vim +PluginInstall +qall
 youcompleteme_install=$HOME/.vim/bundle/YouCompleteMe/install.py
-# python $youcompleteme_install
+# IF NOT C++ needed install with  python $youcompleteme_install
 python $youcompleteme_install --clang-completer
 
 # Openbox stuff

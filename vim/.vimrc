@@ -16,6 +16,7 @@ Bundle 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
+Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
 
@@ -61,8 +62,6 @@ nnoremap <space> za
 " enable all Python syntax highlighting features
 let python_highlight_all = 1
 
-" Nerdtree ignore
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 " Python specific
 au BufNewFile,BufRead *.py
@@ -90,10 +89,14 @@ au BufNewFile,BufRead *.cpp
 
 " Youcompleteme
 let g:ycm_autoclose_preview_window_after_completion=1
-" Set  global conf for C++ autocomplete
-" YcmGenerateConfig does the trick for C++ 
+" Set  global conf for C++ autocomplete, with:YcmGenerateConfig
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+" Nerdtree
+map <silent> <C-n> :NERDTreeToggle<CR>
+" Nerdtree ignore
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 
 "python with virtualenv support
