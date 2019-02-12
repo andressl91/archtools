@@ -39,11 +39,6 @@ On_White='\e[47m'       # White
 NC="\e[m"               # Color Reset
 
 
-#256 color
-TESTING='\e[38;5;200'
-HOLA='\033[38;5;229;21m'
-
-
 # new alert text
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
@@ -71,9 +66,6 @@ alias logs="find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1
 alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
 alias grep='grep --color=auto'
 
-# git alias
-alias gl="git log --pretty=format:'%C(yellow)%h %Cred%ad %C(cyan)%an%Cgreen%d %Creset%s' --date=short "
-
 # Creates an archive (*.tar.gz) from given directory.
 function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
 
@@ -83,11 +75,11 @@ function makezip() { zip -r "${1%%/}.zip" "$1" ; }
 function extract {
  if [ -z "$1" ]; then
     # display usage if no parameters given
-    eearho "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
  else
     if [ -f $1 ] ; then
-        NAME=${1%.*}
-        mkdir $NAME && cd $NAME
+        # NAME=${1%.*}
+        # mkdir $NAME && cd $NAME
         case $1 in
           *.tar.bz2)   tar xvjf ../$1    ;;
           *.tar.gz)    tar xvzf ../$1    ;;
@@ -133,16 +125,10 @@ mcd () {
   cd $1
 }
 
-setxkbmap -layout us -variant altgr-intl
-
-
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-#export PS1="\[\033[38;5;12m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[\033[38;5;12m\]@\[$(tput sgr0)\]\[\033[38;5;7m\]\h\[$(tput sgr0)\]\[\033[38;5;12m\]]\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;7m\]\w\[$(tput sgr0)\]\[\033[38;5;12m\]>\[$(tput sgr0)\]\[\033[38;5;10m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
-#PS1="[\d \t \u@\h:\w ] $ "
-PS1="${HOLA}\u@\h:\w ${RESET}> "
-
+export PS1="\[\033[38;5;12m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[\033[38;5;12m\]@\[$(tput sgr0)\]\[\033[38;5;7m\]\h\[$(tput sgr0)\]\[\033[38;5;12m\]]\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;7m\]\w\[$(tput sgr0)\]\[\033[38;5;12m\]>\[$(tput sgr0)\]\[\033[38;5;10m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
 [ -e "/etc/DIR_COLORS" ] && DIR_COLORS="/etc/DIR_COLORS"
 [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
