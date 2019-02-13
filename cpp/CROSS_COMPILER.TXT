@@ -1,0 +1,6 @@
+
+#Bulding cross compiler
+https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/
+
+# Good ref regarding putting libraries, when doing cross compiling
+https://stackoverflow.com/questions/18900855/how-to-work-with-external-libraries-when-cross-compiling/18902860

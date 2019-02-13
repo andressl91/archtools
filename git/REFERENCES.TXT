@@ -1,0 +1,10 @@
+# SET UP HELPER FOR 2-AUTH WHEN USING HTTPS:
+
+1. Make somefile.sh with:
+#!/bin/bash
+echo username=$GIT_USERNAME
+echo password=$GIT_PASSWORD (define initiated token at github here)
+
+2. In local git_repo, do:
+git config credential.helper "/bin/bash /full/path/to/somefile.sh""
+
