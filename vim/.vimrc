@@ -98,6 +98,8 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 " Nerdtree ignore
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
+" Custom key binding
+:nnoremap <F5> :rightb vert term<CR>>
 
 "python with virtualenv support
 py << EOF
