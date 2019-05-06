@@ -1,0 +1,26 @@
+Use fallocate to create a swap file the size of your choosing (M = Mebibytes, G = Gibibytes). For example, creating a 512 MiB swap file:
+
+# fallocate -l 512M /swapfile
+
+Note: fallocate may cause problems with some file systems such as F2FS.[1] As an alternative, using dd is more reliable, but slower:
+
+# dd if=/dev/zero of=/swapfile bs=1M count=512 status=progress
+
+Set the right permissions (a world-readable swap file is a huge local vulnerability)
+
+# chmod 600 /swapfile
+
+After creating the correctly sized file, format it to swap:
+
+# mkswap /swapfile
+
+Activate the swap file:
+
+# swapon /swapfile
+
+Finally, edit fstab to add an entry for the swap file:
+
+/etc/fstab
+
+/swapfile none swap defaults 0 0
+
