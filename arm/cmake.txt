@@ -1,0 +1,27 @@
+# MANUAL FOR SETTING VARIABLES TO POINT TO CROSS COMPILER 
+
+
+Option 1:
+
+You can set CMake variables at command line like this:
+
+cmake -D CMAKE_C_COMPILER="/path/to/your/c/compiler/executable" -D CMAKE_CXX_COMPILER "/path/to/your/cpp/compiler/executable" /path/to/directory/containing/CMakeLists.txt
+
+See this to learn how to create a CMake cache entry.
+
+Option 2:
+
+In your shell script build_ios.sh you can set environment variables CC and CXX to point to your C and C++ compiler executable respectively, example:
+
+export CC=/path/to/your/c/compiler/executable
+export CXX=/path/to/your/cpp/compiler/executable
+cmake /path/to/directory/containing/CMakeLists.txt
+
+Option 3:
+
+Edit the CMakeLists.txt file of "Assimp": Add these lines at the top (must be added before you use project() or enable_language() command)
+
+set(CMAKE_C_COMPILER "/path/to/your/c/compiler/executable")
+set(CMAKE_CXX_COMPILER "/path/to/your/cpp/compiler/executable")
+
+See this to learn how to use set command in CMake. Also this is a useful resource for understanding use of some of the common CMake variables.
