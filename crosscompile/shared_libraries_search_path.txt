@@ -1,0 +1,5 @@
+When executing binary, where shared library are not in default search path of OS
+
+make a new .conf file in /etc/ld.so.conf 
+type: ldconfig -v 
+verfy library is loaded to mem
