@@ -1,6 +1,5 @@
 # MANUAL FOR SETTING VARIABLES TO POINT TO CROSS COMPILER 
 
-
 Option 1:
 
 You can set CMake variables at command line like this:
@@ -25,3 +24,37 @@ set(CMAKE_C_COMPILER "/path/to/your/c/compiler/executable")
 set(CMAKE_CXX_COMPILER "/path/to/your/cpp/compiler/executable")
 
 See this to learn how to use set command in CMake. Also this is a useful resource for understanding use of some of the common CMake variables.
+
+##### MINIMAL EXAMPLE WITH NICE ENVIRON VARIABLES ####
+
+cmake_minimum_required(VERSION 3.13)
+#set(CMAKE_INSTALL_PREFIX /home/jackal/projects/cmkaedummy/dummy)
+#set(CMAKE_INSTALL_LIBDIR lib)
+#set(CMAKE_INSTALL_BINDIR bin)
+#set(CMAKE_INSTALL_INCLUDEDIR include)
+
+
+
+project(squealercpp)
+
+message("INSTALL PREFIX = ${CMAKE_INSTALL_PREFIX} \n")
+
+# cmake find_package doesn't support find_package for sqlite
+include_directories(include)
+add_library(echo SHARED src/print.cpp)
+target_compile_options(echo PUBLIC -Wall -shared -fPIC)
+
+add_executable(squeal src/main.cpp)
+target_link_libraries(squeal echo)
+target_include_directories(squeal PRIVATE include)
+
+
+#set(YE /home/jackal/projects/cmkaedummy/dummy/lib)
+#target_compile_options(squeal PRIVATE -R ${YE})
+
+
+install(TARGETS squeal)
+install(TARGETS echo)
+
+
+
