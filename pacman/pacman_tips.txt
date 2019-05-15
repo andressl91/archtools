@@ -1,0 +1,3 @@
+# Pacman stores all packages in /var/cache/pacman/pkg
+
+- sudo pacman -Sw {package}   downloads package to mentioned destination without installing
