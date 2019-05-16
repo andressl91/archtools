@@ -18,7 +18,7 @@ USE_NEWLIB=0
 LINUX_ARCH=arm64
 CONFIGURATION_OPTIONS="--disable-multilib" # --disable-threads --disable-shared
 BINUTILS_VERSION=binutils-2.32
-GCC_VERSION=gcc-9.1.0
+GCC_VERSION=gcc-9.1.0 # error in final step, might be due to bleeding edge GCC
 LINUX_KERNEL_VERSION=linux-3.9
 GLIBC_VERSION=glibc-2.29
 MPFR_VERSION=mpfr-4.0.2
@@ -26,7 +26,8 @@ GMP_VERSION=gmp-6.1.2
 MPC_VERSION=mpc-1.1.0
 ISL_VERSION=isl-0.18
 CLOOG_VERSION=cloog-0.18.1
-PARALLEL_MAKE=-j4
+PARALLEL_MAKE=-j6
+LANGUAGES="c,c++"
 export PATH=$INSTALL_PATH/bin:$PATH
 
 # Download packages
@@ -47,10 +48,10 @@ wget -nc ftp://gcc.gnu.org/pub/gcc/infrastructure/$ISL_VERSION.tar.bz2
 wget -nc ftp://gcc.gnu.org/pub/gcc/infrastructure/$CLOOG_VERSION.tar.gz
 
 # Extract everything
- for f in *.tar*; do tar xfk $f; done
+for f in *.tar*; do tar xfk $f; done
 
 # Make symbolic links
-cd $GCC_VERSION
+cd ${GCC_VERSION}
 ln -sf `ls -1d ../mpfr-*/` mpfr
 ln -sf `ls -1d ../gmp-*/` gmp
 ln -sf `ls -1d ../mpc-*/` mpc
@@ -58,71 +59,73 @@ ln -sf `ls -1d ../isl-*/` isl
 ln -sf `ls -1d ../cloog-*/` cloog
 cd ..
 
+# User must own install
+# sudo mkdir -p /opt/cross
+# sudo chown ${user} /opt/cross
+
+export PATH=/opt/cross/bin:$PATH
+
 # Step 1. Binutils
-mkdir -p build-binutils
-cd build-binutils
+mkdir build-binutils && cd build-binutils
+# Control multilib flag 
 ../$BINUTILS_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET $CONFIGURATION_OPTIONS
-make $PARALLEL_MAKE
+make ${PARALLEL_MAKE}
 make install
+echo Stepping out of step 1
 cd ..
 
 # Step 2. Linux Kernel Headers
-if [ $USE_NEWLIB -eq 0 ]; then
-    cd $LINUX_KERNEL_VERSION
-    make ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$INSTALL_PATH/$TARGET headers_install
-    cd ..
-fi
-
-# Step 3. C/C++ Compilers
-mkdir -p build-gcc
-cd build-gcc
-if [ $USE_NEWLIB -ne 0 ]; then
-    NEWLIB_OPTION=--with-newlib
-fi
-../$GCC_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET --enable-languages=c,c++ $CONFIGURATION_OPTIONS $NEWLIB_OPTION
-make $PARALLEL_MAKE all-gcc
-make install-gcc
+cd $LINUX_KERNEL_VERSION
+make ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$INSTALL_PATH/$TARGET headers_install
+echo Stepping out of step 2
 cd ..
 
-if [ $USE_NEWLIB -ne 0 ]; then
-    # Steps 4-6: Newlib
-    mkdir -p build-newlib
-    cd build-newlib
-    ../newlib-master/configure --prefix=$INSTALL_PATH --target=$TARGET $CONFIGURATION_OPTIONS
-    make $PARALLEL_MAKE
-    make install
-    cd ..
-else
-    # Step 4. Standard C Library Headers and Startup Files
-    mkdir -p build-glibc
-    cd build-glibc
-    ../$GLIBC_VERSION/configure --prefix=$INSTALL_PATH/$TARGET --build=$MACHTYPE --host=$TARGET --target=$TARGET --with-headers=$INSTALL_PATH/$TARGET/include $CONFIGURATION_OPTIONS libc_cv_forced_unwind=yes
-    make install-bootstrap-headers=yes install-headers
-    make $PARALLEL_MAKE csu/subdir_lib
-    install csu/crt1.o csu/crti.o csu/crtn.o $INSTALL_PATH/$TARGET/lib
-    $TARGET-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o $INSTALL_PATH/$TARGET/lib/libc.so
-    touch $INSTALL_PATH/$TARGET/include/gnu/stubs.h
-    cd ..
+# Step 3. C/C++ Compilers
+mkdir -p build-gcc && cd build-gcc
+../$GCC_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET --enable-languages=${LANGUAGES}
+make $PARALLEL_MAKE all-gcc
+make install-gcc
+echo Stepping out of step 3
+cd ..
 
-    # Step 5. Compiler Support Library
-    cd build-gcc
-    make $PARALLEL_MAKE all-target-libgcc
-    make install-target-libgcc
-    cd ..
+# Step 4. Standard C Library Headers and Startup Files
+mkdir -p build-glibc && cd build-glibc
+../$GLIBC_VERSION/configure --prefix=$INSTALL_PATH/$TARGET --build=$MACHTYPE --host=$TARGET --target=$TARGET --with-headers=$INSTALL_PATH/$TARGET/include $CONFIGURATION_OPTIONS libc_cv_forced_unwind=yes
+make install-bootstrap-headers=yes install-headers
+make $PARALLEL_MAKE csu/subdir_lib
+install csu/crt1.o csu/crti.o csu/crtn.o $INSTALL_PATH/$TARGET/lib
+$TARGET-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o $INSTALL_PATH/$TARGET/lib/libc.so
+touch $INSTALL_PATH/$TARGET/include/gnu/stubs.h
+echo Stepping out of step 4
+cd ..
 
-    # Step 6. Standard C Library & the rest of Glibc
-    cd build-glibc
-    make $PARALLEL_MAKE
-    make install
-    cd ..
-fi
+# Step 5. Compiler Support Library
+cd build-gcc
+make $PARALLEL_MAKE all-target-libgcc
+make install-target-libgcc
+echo Stepping out of step 5
+cd ..
+
+
+# Step 6. Standard C Library & the rest of Glibc
+cd build-glibc
+make $PARALLEL_MAKE
+make install
+echo Stepping out of step 6
+cd ..
 
 # Step 7. Standard C++ Library & the rest of GCC
 cd build-gcc
 make $PARALLEL_MAKE all
 make install
+echo Stepping out of step 7
 cd ..
 
-trap - EXIT
-echo 'Success!'
+
+
+
+
+
+
+
 
