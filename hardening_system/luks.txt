@@ -1,0 +1,45 @@
+# Encryption using LUKS (Linux Unified Key Setup)
+
+# Preparation
+- It's recommended to perform a secure erase of the disk by overwriting
+  the entire drive with random data.
+  - NOTE! When wiping large amount of data, the process will take several hours 
+    to several days to complete.
+
+  Example using dd: sudo dd if=/dev/zero of=/dev/sdx
+          using shred: sudo shred /dev/sdx -n1 -f -z
+          -z Add a final overwrite with zeros to hide shredding
+          -n1 Overwrite N times instead of default (3)
+          -f change persmissions to allow writing if necessary
+
+# You need cryptsetup (pacman -S cryptsetup, or OS equivalent)
+
+# We assume here a removable media, but any disk/drive is equavalent
+1. Format drive or removable media if needed
+
+2. cryptsetup luksFormat /dev/sda1 (or whatever partition )
+ - Type YES
+ - Set password  
+ - It is now encryptet with luks
+
+# Make a logical device-mapper "foo", for luks partion
+3. cryptsetup luksOpen /dev/sda1 foo
+ - Enter password
+ - will show as /dev/mapper/foo
+
+
+ Optional, run cryptsetup luksDump /dev/sda1 to very success.
+
+# Only first time... we need to make a filesystem. As usual, be unmounted
+4. mkfs.ext4 /dev/mapper/foo
+
+# Make mountpoint if nescecarry, and mount dev/mapper/foo
+5. mount /dev/mapper/foo /mnt
+
+# We have now encrypted partition, and mounted it
+
+# To remove
+- umount /mnt
+- cryptsetup luksClose foo (will remove from /dev/mapper/foo)
+
+    
