@@ -1,0 +1,17 @@
+#Single user mode or rescue/emergency.service in systemd
+
+# On boot, a user can edit the boot prosess (in GRUB ). In the linux line in boot process,
+ after root=/dev... ro, add "systemd.unit=rescue.target", or simply "rescue".
+# Can set simply "s" after ro, on other systems not using systemd 
+
+# Navigate to /lib/systemd/system
+# Make sure both rescue.service and emergency.service DO NOT initiate 
+# sushell. If sushell is set, booter get imidiate loginshell without putting in root pass.
+
+# They should inititate sulogin
+- ExecStart=-/usr/lib/systemd/systemd-sulogin-shell emergency
+
+# If your are on a system with no root password, you still get access, so you have to set one.
+
+
+

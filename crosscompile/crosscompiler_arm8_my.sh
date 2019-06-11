@@ -82,7 +82,8 @@ cd ..
 
 # Step 3. C/C++ Compilers
 mkdir -p build-gcc && cd build-gcc
-../$GCC_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET --enable-languages=${LANGUAGES}
+#../$GCC_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET --enable-languages=${LANGUAGES}
+../$GCC_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET --enable-languages=${LANGUAGES} 
 make $PARALLEL_MAKE all-gcc
 make install-gcc
 echo Stepping out of step 3

@@ -1,0 +1,32 @@
+# Steps mentioned in physcial_access.txt can be bypassed again in boot config
+for grup, by simply setting init=/bin/bash, skipping systemd/init
+
+In boot-configuration by the "linux line" (communicating with kernel), add at the end
+- init=/bin/bash   / we are telling the kernel to use /bin/bash as the init-system, we
+                   / we are dropped in a root shell  
+
+# To avoid this, we set a password so the boot configuration cant be edited without
+knowing the password. we are protecting the grub boot-loader.
+
+
+# EDIT 40_custom file!  
+- 40_custom is not touched in case of package update!  
+
+# To secure grub, we have to edit /etc/grub.d/40_custom and set 
+set superusers="root"   / Here users can be anythong
+password root root      / Set password for user set, chose something better
+
+
+# weakness with this is that pasword is in plain view, instead run
+grub-mkpasswd-pbkdf2  \ you will be prompted with to enter password twice
+                      \ long string will we produced
+                      \ Take the part from  grub.pbkdf2.sha512.......... all the way to the end
+
+set superusers="root"
+password_pbkdf2 root grub.pbkdf2.sha512.10000.biglongstring
+
+
+IMPORTANT RECONFIGURE grub.cfg, binary might be OS dependent
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# YOU CAN VISUALLY CHECK CHANGES IN grub.cfg, search for superuser

@@ -92,9 +92,6 @@ cd ..
 
 
 #    --with-sysroot=$LFS                            \
-# REDUCE DISABLE STUFF IF LIBS WONT COMPILE, MOTIVATION WAS
-# THAT THE HALF-MADE COMPILE MADE TO MAKE BOOTSTRAP COMPILER, DIDN'T NEED ALL THIS
-# AND WAS ADDED LATER IN STEPS 4-6
 
 # Step 3. C/C++ Compilers
 mkdir -p build-gcc && cd build-gcc
@@ -124,9 +121,9 @@ cd ..
 mkdir -p build-glibc
 cd build-glibc
 ../${GLIBC_VERSION}/configure \
-                --prefix=$INSTALL_PATH/$TARGET \ 
+                --prefix=$INSTALL_PATH/$TARGET \
                 --build=$MACHTYPE \
-                --host=$TARGET \ #SHOULD BE TARGET OR MACHTYPE?
+                --host=$TARGET \
                 --target=$TARGET \
                 --with-headers=$INSTALL_PATH/$TARGET/include \
                 --disable-multilib \
