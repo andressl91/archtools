@@ -125,6 +125,8 @@ mcd () {
   cd $1
 }
 
+setxkbmap -layout us -variant altgr-intl
+
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
