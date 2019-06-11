@@ -44,3 +44,15 @@
 - cryptsetup luksClose foo (will remove from /dev/mapper/foo)
 
     
+###### PERSISTANCE ######
+Define in etc/fstab, simple setup:
+/dev/mapper/foo /foo ext4 defaults 0 0
+ - OR USE UUID:   UUID=1234-ABCD /foo ext4 defaults 0 0
+
+Then make entry in /etc/crypttab
+foo /dev/sda1 none luks   (note here we use /dev/sda1, change to /dev/sda if not part)
+
+- crypttab also support UUID, can be located after luksOpen, then do sudo blkid
+    - simply replace /dev/sda1 with UUID=..., output from blkid
+    NOTE! OUTPUT FROM BLKID WITHOUT ""
+
