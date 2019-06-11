@@ -7,10 +7,11 @@
     to several days to complete.
 
   Example using dd: sudo dd if=/dev/zero of=/dev/sdx
-          using shred: sudo shred /dev/sdx -n1 -f -z
+          using shred: sudo shred /dev/sdx -n 1 -f -z -v
           -z Add a final overwrite with zeros to hide shredding
           -n1 Overwrite N times instead of default (3)
           -f change persmissions to allow writing if necessary
+          -v VERBOSE
 
 # You need cryptsetup (pacman -S cryptsetup, or OS equivalent)
 
