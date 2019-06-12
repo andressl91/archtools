@@ -1,0 +1,7 @@
+Studielån, 385432 kr, nominell rente 2.168, innfrielse 15.03.2039
+
+Mastercard, grense 20000kr, utestående 100, nominell rente 18,60, fakturagebyr
+
+Mastercard shell, grense 20000kr, utestående 585, , mnd gebyr 45, nominell rente 21,50
+
+Billån Nominell, Opprinnelig 76251, restrerendede 55333,  rente 5.13%, innfridd 10.11.22
