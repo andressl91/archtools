@@ -17,7 +17,7 @@ vim +PluginInstall +qall
 youcompleteme_install=$HOME/.vim/bundle/YouCompleteMe/install.py
 # IF NOT C++ needed install with  python $youcompleteme_install
 python $youcompleteme_install --clang-completer
-sudo pacman -S python-virtualenv
+sudo pacman -S python ipython python-virtualenv
 
 ####### TERMINAL ######
 # urxvt
@@ -32,7 +32,12 @@ cp $install_folder/bash/.bashrc $HOME/
 
 
 ######## SYSTEM #########
-sudo pacman -S htop
+sudo pacman -S htop openssh
+ssh-keygen -t rsa -b 4096
+
+# Make ssh-key
+ssss
+
 # Internet browser
 sudo pacman -S firefox
 
@@ -43,7 +48,4 @@ sudo pacman -S macchanger
 # VPN
 sudo pacman -S openresolv
 sudo pacman -S openvn
-mkdir -p /etc/openvpn/
 sudo cp ${install_folder}/openvpn/update-resolv-conf /etc/openvpn/
-echo proceed to download .conf file for your VPN and add 
-cat ${install_folder}/openvpn/install.sh 
