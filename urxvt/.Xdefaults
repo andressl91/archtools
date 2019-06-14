@@ -27,12 +27,10 @@ URxvt.keysym.C-S-Down: font-size:decglobal
 URxvt.keysym.C-equal:  font-size:reset
 URxvt.keysym.C-slash:  font-size:show
 
-!! MIGHT GIVE EXTRA SLASH, CONSIDER DELETE
-!!URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,font-size, fullscreen
-URxvt.url-select.launcher:  chromium
-URxvt.keysym.M-c:   perl:clipboard:copy
-URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.url-select.launcher:  firefox
 !!URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 URxvt.clipboard.autocopy: true
+URxvt.keysym.C-S-c:   perl:clipboard:copy
+URxvt.keysym.C-S-v:   perl:clipboard:paste
 
 URxvt.keysym.C-S-F: perl:fullscreen:switch

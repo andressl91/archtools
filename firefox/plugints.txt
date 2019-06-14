@@ -1,0 +1,9 @@
+* DuckDuckGo
+* Privacy Badger
+* uBlock Origin
+* Cookie AutoDelete
+* HTTPS Everywhere
+* Terms of Service; Didn't Read: Be Informed
+
+# GOOD SOURCE
+https://privacytools.io
