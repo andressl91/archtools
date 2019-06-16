@@ -56,6 +56,9 @@ echo down-pre
 ###### RICE ######
 echo RICE UP THE DESKTOP
 sudo pacman -S feh imagemagick python-pip python-pywal
+mkdir -p $HOME/Pictures/Wallpaper
+cp $install_folder/rice/leopard.png $HOME/Pictures/Wallpaper
+cp $install_folder/rice/leopard.jpg $HOME/Pictures/Wallpaper
 echo NOW RUN: wal -i "PATH TO IMAGE", and watch the magic
 
 
