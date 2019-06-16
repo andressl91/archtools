@@ -4,6 +4,7 @@ ref https://github.com/IbrahimButt/Direwolf-Arch-Rice
 - remebmer to adjust shade i .Xdefaults regarding wallapaper
 
 - module cmatrix for cool screensaver!!
-
-
 - lookup urxvt applicationstart
+
+# MAGIC
+-  wal -i ~/Pictures/Wallpaper/leopard.jpg 

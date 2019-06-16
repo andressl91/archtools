@@ -4,7 +4,6 @@
 install_folder=$(dirname $(readlink -f $0)) 
 
 ####### Vim #######
-
 sudo pacman -S vim vim-runtime
 echo COPYING VIM CONFIG TO $HOME/.vimrc
 cp $install_folder/vim/.vimrc $HOME/
@@ -19,6 +18,10 @@ youcompleteme_install=$HOME/.vim/bundle/YouCompleteMe/install.py
 python $youcompleteme_install --clang-completer
 sudo pacman -S python ipython python-virtualenv
 
+# WINDOW MANAGER i3-wm
+echo COPY i3 CONFIG TO HOME DIRECTORY
+cp $install_folder/i3wm/config $HOME/.config/i3
+
 ####### TERMINAL ######
 # urxvt
 sudo pacman -S rxvt-unicode
@@ -27,25 +30,33 @@ cp -r $install_folder/urxvt/.Xdefaults $HOME/
 mkdir -p $HOME/.urxvt/etx && cp $install_folder/urxvt/scripts/* $HOME/.urxvt/etx
 
 # bash
+echo COPYING BASHRC CONFIG FILE
 cp $install_folder/bash/.bashrc $HOME/
-
-
 
 ######## SYSTEM #########
 sudo pacman -S htop openssh
-ssh-keygen -t rsa -b 4096
 
 # Make ssh-key
-ssss
+echo GENERATE SSH-KEY
+ssh-keygen -t rsa -b 4096
 
 # Internet browser
 sudo pacman -S firefox
 
-
 ######## PRIVACY #########
-# Macchanger
-sudo pacman -S macchanger
-# VPN
-sudo pacman -S openresolv
-sudo pacman -S openvn
+# VPN and macchanger
+sudo pacman -S openresolv openvn macchanger
 sudo cp ${install_folder}/openvpn/update-resolv-conf /etc/openvpn/
+echo ADD FOLLOWING IN OPENVPN client.conf
+echo script-security 2
+echo up /etc/openvpn/update-resolv-conf.sh
+echo down /etc/openvpn/update-resolv-conf.sh
+echo down-pre
+
+###### RICE ######
+echo RICE UP THE DESKTOP
+wal -i ~/Pictures/Wal/bg1.jpg
+sudo pacman -S feh imagemagick python-pip python-pywal
+echo NOW RUN: wal -i "PATH TO IMAGE", and watch the magic
+
+
