@@ -55,7 +55,6 @@ echo down-pre
 
 ###### RICE ######
 echo RICE UP THE DESKTOP
-wal -i ~/Pictures/Wal/bg1.jpg
 sudo pacman -S feh imagemagick python-pip python-pywal
 echo NOW RUN: wal -i "PATH TO IMAGE", and watch the magic
 
