@@ -1,7 +1,6 @@
 set $mod Mod4
 
 #font pango:monospace 18
-font pango:DejaVu Sans Mono 18
 
 
 set_from_resource $darkred     color1  #000000
@@ -164,6 +163,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        font pango:DejaVu Sans Mono 20
         separator_symbol "|"
         height 40
         
