@@ -1,2 +1,0 @@
-bash lemonbar_config/lemonbar_wip.sh | lemonbar -p -b -f "Droid Sans-16" &
-
