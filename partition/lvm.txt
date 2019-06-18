@@ -1,0 +1,54 @@
+### GUIDE FOR CREATING LVM VOLUMES #####
+
+1. FIRST MAKE PHYSICAL VOLUMES
+    - list all devices capable of being used as a physical volume (optional)
+        run: lvmdiskscan
+        or : lvs to list all current Logical Volumes with their VG
+        or : vgs to list all current Volume Groups with their VG
+        or : pvs to list all current Physical Volume with their VG
+
+pvcreate /dev/sda  
+## OR if partitioned## 
+pvcreate /dev/sda1
+        - Can now display physical volumes with: pvdisplay
+
+2. MAKE A VOLUME GROUP TO THE PHYSCIAL VOLUME
+vgcreate <volume group> <path/to/physical volume>
+
+# IF YOU HAVE MULTIPLE PHYSICAL VOLUMES YOU WANT TO HAVE FOR ONE VOLUME GROUP
+vgextend <volumne group> <physical volume>
+    - To track how your volume group grows: vgdisplay
+
+3. NOW CREATE A LOGICAL VOLUME ATTACHED TO THE VOLUME GROUP
+lvcreate -L <size> <volume group> -n <logical volume>
+- BONUS: IF YOU WANT TO ALLOCATE ALL REMAINING SPACE: lvcreate -l 100%FREE <volume group> -n <logical volume>
+
+#### NOTES ####
+The logical colume is now mapped to /dev/<volume_name>/<logical volume>
+
+4. CREATE FILE SYSTEM AND MOUNT LOGICAL VOLUMES
+mkfs.<ftype> /dev/<volume group>/<logical volume>
+mount /dev/<volume group>/<logical volume> /<mountpoint>
+
+DONE!
+
+
+###### REMOVAL OF LVM VOLUMES AND GROUPS
+1. LOCATE LOGICAL VOLUMES AND THEIR MOUNTPOINTS. 
+- List all logical volumes with: lvs
+- List all mountpoints of these logical volumes
+
+2. UNMOUNT MOUNTPOINTS OF LOGICAL VOLUMES
+umount /<mountpoint>
+
+3. REMOVE LOGICAL VOLUME
+lvremove <volume group>/<logical volume>
+
+4. REMOVE VOLUME GROUP (make sure no volumes are present i volume group)
+    - NICE TOOL, USE: vgs, to see virtual groups and their attaced nr of logical volues.
+                 ALSO: pvscan, easier to se what physical storage is used for a VG
+
+- DEACTIVATE THE VOLUME GROUP: vgchange -a n <volume group>
+                                -a is holder for activate, takes y/n for activate/deactivate
+- REMOVE THE VOLUME GROUP: vgremove <volume group>
+
