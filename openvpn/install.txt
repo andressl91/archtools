@@ -1,4 +1,7 @@
+##### This updates the resolvconf with dns settings #####
+setenv PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 script-security 2
 up /etc/openvpn/update-resolv-conf.sh
 down /etc/openvpn/update-resolv-conf.sh
 down-pre
+
