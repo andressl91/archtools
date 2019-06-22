@@ -1,0 +1,25 @@
+1. First update pacman.conf in root directory to point 
+   to chroot relative pacman.d and pacman.conf
+ 
+2. First time with pacman
+(Tip! If it doesnt't work, also specify --gpgdir to .../armroot/ in .conf if not done)
+pacman-key --init --config /path/to/armroot/etc/pacman.conf
+
+
+3. I DON'T REMEMBER, but this might be nescecarry
+pacman-key --populate archlinuxarm   
+(Should use same build keys, but in case I copied archlinuxarm to local and run command)
+
+
+4. Not you should be able to run
+sudo pacman -S htop --config /home/jackal/chroot/etc/pacman.conf
+
+# Tips from website: https://archlinuxarm.org/forum/viewtopic.php?t=6163
+Setting its root and other dirs to toolchain sysroot and subdirs and using a modified config through a wrapper script, pacman can simply install all the needed dependencies (pacman-arm -Sydd dep1 dep2) without any further dependency resolving since only header files and shared objects are needed anyway.
+
+However, even now some limitations remain. Host needs all dependencies and build-dependencies installed, too. And if any build-dependency tries to modify binaries or something, then all will almost definitively fail. And if the Makefile does crazy things, then cross-compiling might fail. I think I'll do some further research, refine this method and maybe write a complete guide for those interested.
+
+
+
+######################### EXPERMIENT ############################
+https://wiki.archlinux.org/index.php/DeveloperWiki:Building_in_a_clean_chroot
