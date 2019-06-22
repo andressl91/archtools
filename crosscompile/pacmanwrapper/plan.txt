@@ -1,0 +1,9 @@
+1. Try to make crossompiler script such that:
+    - We use root system from Raspberry Pi root
+    - Maby put name-prefix of crosscompiler gcc and g++ to be installed
+      in root/bin. Motivation, we can use bulding in clean chroot guide:
+      https://wiki.archlinux.org/index.php/DeveloperWiki:Building_in_a_clean_chroot
+      directly by specifying gcc/g++
+
+    - ALSO LOOK INTO makepgk.conf in homedir, REF:
+    Edit ~/.makepkg.conf to set the packager name and any makeflags. Also adjust the mirrorlist in $CHROOT/root/etc/pacman.d/mirrorlist and enable the testing repository in $CHROOT/root/etc/pacman.conf, if desired.

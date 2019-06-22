@@ -23,3 +23,31 @@ However, even now some limitations remain. Host needs all dependencies and build
 
 ######################### EXPERMIENT ############################
 https://wiki.archlinux.org/index.php/DeveloperWiki:Building_in_a_clean_chroot
+
+Interesting stuff:
+
+# To make clean archroot
+mkarchroot $CHROOT/root base-devel
+# Then guide says
+Edit ~/.makepkg.conf to set the packager name and any makeflags. Also adjust the mirrorlist in $CHROOT/root/etc/pacman.d/mirrorlist and enable the testing repository in $CHROOT/root/etc/pacman.conf, if desired.
+
+
+# BUT, we can specify custom pacman.conf and makepkg.conf upon creation of the clean chroot
+Custom pacman.conf
+
+Alternatively, provide a custom pacman.conf and makepkg.conf with the following:
+
+$ mkarchroot -C <pacman.conf> -M <makepkg.conf> $CHROOT/root base-devel
+
+Warning: Using a custom pacman.conf or makepkg.conf during the initial creation of clean chroot can result in unintended custom adjustments to the chroot environment. Use with caution.
+
+## WE CAN NOW WORK IN THIS WAY:
+Building in the chroot
+Firstly, make sure the base chroot ($CHROOT/root) is up to date:
+
+# In general, it seams to run commands in chroot
+$ arch-nspawn $CHROOT/root pacman -Syu
+
+Then, build a package by calling makechrootpkg in the directory containing its PKGBUILD:
+$ makechrootpkg -c -r $CHROOT
+
