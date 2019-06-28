@@ -8,6 +8,7 @@ pacman-key --init --config /path/to/armroot/etc/pacman.conf
 
 3. I DON'T REMEMBER, but this might be nescecarry
 pacman-key --populate archlinuxarm   
+(keys located at /usr/share/pacman/keyrings)
 (Should use same build keys, but in case I copied archlinuxarm to local and run command)
 
 
