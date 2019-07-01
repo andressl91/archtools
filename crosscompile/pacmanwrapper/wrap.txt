@@ -14,6 +14,9 @@ pacman-key --populate archlinuxarm
 
 4. Not you should be able to run
 sudo pacman -S htop --config /home/jackal/chroot/etc/pacman.conf
+# IF NOT, do -Sydd see below
+
+
 
 # Tips from website: https://archlinuxarm.org/forum/viewtopic.php?t=6163
 Setting its root and other dirs to toolchain sysroot and subdirs and using a modified config through a wrapper script, pacman can simply install all the needed dependencies (pacman-arm -Sydd dep1 dep2) without any further dependency resolving since only header files and shared objects are needed anyway.
