@@ -1,0 +1,14 @@
+# wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz
+# tar xJf Python-3.6.3.tar.xz
+# cd Python-3.6.3
+# ./configure
+# make
+# make install
+
+# add config.site, to avoid checks which will fail for crosscompile
+# containing only:
+    ac_cv_file__dev_ptmx=no
+    ac_cv_file__dev_ptc=no
+
+
+CONFIG_SITE=config.site ./configure --host=aarch64-unknown-linux-gnu --prefix=/home/jackal/arm64cross/aarch64-unknown-linux-gnu --build=x86_64-pc-linux-gnu --disable-ipv6 --with-headers=/home/jackal/arm68cross/aarch64-unknown-linux-gnu/aarch66-unknown-linux-gnu

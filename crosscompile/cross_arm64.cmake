@@ -35,6 +35,12 @@ set(CMAKE_RANLIB       "${CROSS_ARM_BIN}/${CMAKE_SYSTEM_NAME}-ranlib")
 set(CMAKE_LINKER       "${CROSS_ARM_BIN}/${CMAKE_SYSTEM_NAME}-ld")
 
 ########### Macro to Limit Find path in host and targert ###################
+
+
+## REMEMBER, IF WE REQUIRE LIBS/INCLUDE FROM OTHER LOCATIONS
+# COMMENT OUT CMAKE_FIND_ROOT_PATH_MODE_****, ELSE IT CAN'T FIND..
+
+
 # search for programs in the build host directories
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 # for libraries and headers in the target directories

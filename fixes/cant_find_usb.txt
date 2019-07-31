@@ -1,0 +1,14 @@
+The problem seems to be a catchall rule in /lib/udev/rules.d/69-libmtp.rules:
+
+# Autoprobe vendor-specific, communication and PTP devices
+ENV{ID_MTP_DEVICE}!="1", ENV{MTP_NO_PROBE}!="1", ENV{COLOR_MEASUREMENT_DEVICE}!="1", ENV{libsane_matched}!="yes", ATTR{bDeviceClass}=="00|02|06|ef|ff", PROGRAM="/usr/lib/udev/mtp-probe /sys$env{DEVPATH} $attr{busnum} $attr{devnum}", RESULT=="1", SYMLINK+="libmtp-%k", ENV{ID_MTP_DEVICE}="1", ENV{ID_MEDIA_PLAYER}="1"
+
+Commenting out that line, as shown below, fixed the problem:
+
+# Autoprobe vendor-specific, communication and PTP devices
+ENV{ID_MTP_DEVICE}!="1", ENV{MTP_NO_PROBE}!="1", ENV{COLOR_MEASUREMENT_DEVICE}!="1", ENV{libsane_matched}!="yes", ATTR{bDeviceClass}=="00|02|06|ef|ff", PROGRAM="/usr/lib/udev/mtp-probe /sys$env{DEVPATH} $attr{busnum} $attr{devnum}", RESULT=="1", SYMLINK+="libmtp-%k", ENV{ID_MTP_DEVICE}="1", ENV{ID_MEDIA_PLAYER}="1"
+
+
+#### OR SET 
+ENV{MTP_NO_PROBE}=="1",
+
