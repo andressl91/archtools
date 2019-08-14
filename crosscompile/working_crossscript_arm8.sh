@@ -31,6 +31,7 @@ LANGUAGES="c,c++"
 export PATH=$INSTALL_PATH/bin:$PATH
 
 # Download packages
+# IMPLEMENT CHOICE OF USING SCRIPT IN gcc/config/download_prerequisitites
 function download {
     export http_proxy=$HTTP_PROXY https_proxy=$HTTP_PROXY ftp_proxy=$HTTP_PROXY
     wget -nc https://ftp.gnu.org/gnu/binutils/$BINUTILS_VERSION.tar.gz
