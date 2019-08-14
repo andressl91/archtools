@@ -15,6 +15,34 @@ make install
       Crosscheck with config.bfd to find $TARGET lingo. 
       Example: elf32-cr16.c    would yield --target=cr16-elf, compared in config.bfd
 
+      Notice when target is specifies another system then local, 
+      ./configure assumes cross-compiler
+
+Example:
+    For arm8 (aarch64) we see entries for valid target names in lines 226-280.
+    Standard using $TARGET=aarch64-gnu-linux, maching line 259:
+    -aarch64-*-linux
+
+    make install yields the following file structure from $INSTALL_PATH
+
+    ├── aarch64-gnu-linux
+    │   ├── bin
+    │   └── lib
+    │       └── ldscripts
+    ├── bin
+    └── share
+        ├── info
+        └── man
+            └── man1
+
+    Observe we get a plain "root system" for the architecture
+    In $INSTALL_PATH/bin we get the cross compiled tools from binutils.
+    These are named aarch64-gnu-linux-[THE TOOL], example aarch64-gnu-linux-ld
+    in arch64-gnu-linux/bin we get the architecture specific tools without prefix.
+    # INVESTIGATE WHY I CAN RUN THE TOOLS ON LOCAL SYSTEM. 
+    # USUALLY IT WILL SAY WRONG BINARY FORMAT ETC.
+
+
 
 # Step 2. Linux Kernel Headers
 cd $LINUX_KERNEL_VERSION
