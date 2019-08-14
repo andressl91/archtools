@@ -49,9 +49,30 @@ cd $LINUX_KERNEL_VERSION
 make ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$INSTALL_PATH/$TARGET headers_install
 echo Created linux root with headers.
 cd ..
-# GCC now requires the GMP, MPFR and MPC packages. 
+
+
+# Step 3. C/C++ Compilers
+# GCC now requires the GMP, MPFR and MPC packages (FOR NEWER VERSIONS).
 # As these packages may not be included in your host distribution, they will be built with GCC. 
-# Unpack each package into the GCC source directory and rename the resulting directories so the GCC build procedures will automatically use them: 
+# TO OPTIONS:
+
+(SIMPLE)
+1. run ./contrib/download_prerequisites in gcc folder. 
+      It will download all dependencies maching the gcc version. Put them
+      in unpacked gcc root, and symlink folder to dependency source.
+
+(BE SPECIFIC)
+2. Unpack each dependency package into the GCC source directory and rename the resulting directories 
+   so the GCC build procedures will automatically use them. 
+   (what STEP 1 does, however here you can choose versions yourself)
+   
+   EXAMPLE. for mpc pacage say version mpc-1.0.3
+   1. Download source and unpack
+   2. move to unpacked gcc folder and synlink to mpc
+   ln -s mpc-1.0.3 mpc
+   GCC will activly look for these in during configure
+
+
 
  #--disable-decimal-float, --disable-threads, --disable-libatomic, --disable-libgomp, --disable-libquadmath, --disable-libssp, --disable-libvtv, --disable-libstdcxx
 
@@ -63,7 +84,6 @@ cd ..
 # THAT THE HALF-MADE COMPILE MADE TO MAKE BOOTSTRAP COMPILER, DIDN'T NEED ALL THIS
 # AND WAS ADDED LATER IN STEPS 4-6
 
-# Step 3. C/C++ Compilers
 mkdir -p build-gcc && cd build-gcc
 ../$GCC_VERSION/configure     \
     --prefix=$INSTALL_PATH    \
