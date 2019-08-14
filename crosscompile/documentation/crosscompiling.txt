@@ -1,0 +1,85 @@
+# Step 1. Binutils
+mkdir build-binutils && cd build-binutils
+../$BINUTILS_VERSION/configure \
+                    --prefix=$INSTALL_PATH \
+                    --target=$TARGET \
+                    --disable-nls # tells binutils not to include native language support. 
+make ${PARALLEL_MAKE}
+make install
+
+# --prefixs: path to where binutils are installed
+# --target: target cpu architecture for binutils. To find supported CPU architectures:
+    - Download binutils version of choice. Go to bfd directory.
+      By inspection of .c files, and config.bfd, we see what architectures are supported.
+      We can se files of type elf32-SOME_NAME.c, which are the supported targets.
+      Crosscheck with config.bfd to find $TARGET lingo. 
+      Example: elf32-cr16.c    would yield --target=cr16-elf, compared in config.bfd
+
+
+# Step 2. Linux Kernel Headers
+cd $LINUX_KERNEL_VERSION
+make ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$INSTALL_PATH/$TARGET headers_install
+echo Created linux root with headers.
+cd ..
+# GCC now requires the GMP, MPFR and MPC packages. 
+# As these packages may not be included in your host distribution, they will be built with GCC. 
+# Unpack each package into the GCC source directory and rename the resulting directories so the GCC build procedures will automatically use them: 
+
+ #--disable-decimal-float, --disable-threads, --disable-libatomic, --disable-libgomp, --disable-libquadmath, --disable-libssp, --disable-libvtv, --disable-libstdcxx
+
+#    These switches disable support for the decimal floating point extension, threading, libatomic, libgomp, libquadmath, libssp, libvtv, and the C++ standard library respectively. These features will fail to compile when building a cross-compiler and are not necessary for the task of cross-compiling the temporary libc.
+
+
+#    --with-sysroot=$LFS                            \
+# REDUCE DISABLE STUFF IF LIBS WONT COMPILE, MOTIVATION WAS
+# THAT THE HALF-MADE COMPILE MADE TO MAKE BOOTSTRAP COMPILER, DIDN'T NEED ALL THIS
+# AND WAS ADDED LATER IN STEPS 4-6
+
+# Step 3. C/C++ Compilers
+mkdir -p build-gcc && cd build-gcc
+../$GCC_VERSION/configure     \
+    --prefix=$INSTALL_PATH    \
+    --target=$TARGET          \
+    --disable-nls             \
+    --with-arch=armv8-a       \
+    --enable-languages=c,c++  
+make $PARALLEL_MAKE all-gcc
+make install-gcc
+cd .. 
+
+# Step 4. Standard C library headers
+mkdir -p build-glibc
+cd build-glibc
+../${GLIBC_VERSION}/configure \
+                --prefix=$INSTALL_PATH/$TARGET \
+                --build=$MACHTYPE \
+                --host=$TARGET \
+                --target=$TARGET \
+                --with-headers=$INSTALL_PATH/$TARGET/include \
+                --disable-multilib \
+                libc_cv_forced_unwind=yes
+
+make install-bootstrap-headers=yes install-headers
+make $PARALLEL_MAKE csu/subdir_lib
+install csu/crt1.o csu/crti.o csu/crtn.o $INSTALL_PATH/$TARGET/lib
+$TARGET-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o $INSTALL_PATH/$TARGET/lib/libc.so
+touch $INSTALL_PATH/$TARGET/include/gnu/stubs.h
+cd ..
+
+# Step 5.  Compiler support library
+cd build-gcc
+make ${PARALLEL_MAKE} all-target-libgcc
+make install-target-libgcc
+cd ..
+
+# Step 6. Standard C Library & rest of Glibc
+cd build-glibc
+make ${PARALLEL_MAKE}
+make install
+cd ..
+
+cd build-gcc
+make ${PARALLEL_MAKE} all
+make install
+cd ..
+
