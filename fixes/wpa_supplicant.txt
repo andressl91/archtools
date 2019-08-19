@@ -1,0 +1,3 @@
+Failed to initiate sched scan
+1. use single quotes around password for wpa_passphrase
+wpa_passphrase ESSID 'password' > /etc/wpa_supplicant/wpa_supplicant-"interface".conf
