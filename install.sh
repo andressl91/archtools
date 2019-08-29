@@ -45,6 +45,12 @@ function install_rice {
 
 }
 
+function sound {
+    sudo pacman -S alsa-utils 
+    # Now run alasmixer
+
+}
+
 ####### TERMINAL urxvt ######
 function install_urxvt {
     sudo pacman -S rxvt-unicode
