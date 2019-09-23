@@ -19,27 +19,32 @@ INSTALL_PATH=$HOME/sandbox/pacman
 DEPENDENCIES_PATH=$INSTALL_PATH/dependencies
 LINUX_ARCH=arm64
 CONFIGURATION_OPTIONS="--disable-multilib" # --disable-threads --disable-shared
-PARALLEL_MAKE=-j6
+PARALLEL_MAKE=-j3
 PACMAN_VERSION=pacman-5.1.3
 
 mkdir -p $INSTALL_PATH
 
 export http_proxy=$HTTP_PROXY https_proxy=$HTTP_PROXY ftp_proxy=$HTTP_PROXY
 cd ${INSTALL_PATH}
-wget https://sources.archlinux.org/other/pacman/${PACMAN_VERSION}.tar.gz \
---directory-prefix=${INSTALL_PATH} 
+ls
+echo ${PACMAN_VERSION}.tar.gz
+
+if [ ! -f ${PACMAN_VERSION}.tar.gz ]; then
+    wget https://sources.archlinux.org/other/pacman/${PACMAN_VERSION}.tar.gz \
+    --directory-prefix=${INSTALL_PATH} 
+fi
 
 tar zxf ${PACMAN_VERSION}.tar.gz
 
-if [ ! -d ${INSTALL_PATH}/pacman_root ]; then
-    mkdir ${INSTALL_PATH}/pacman_root
-fi
+#if [ ! -d ${INSTALL_PATH}/pacman_root ]; then
+#    mkdir ${INSTALL_PATH}/pacman_root
+#fi
 
-#Check with-root-dir
+#--with-root-dir=${INSTALL_PATH}/pacman_root 
 cd ${PACMAN_VERSION}
 ./configure --prefix=${INSTALL_PATH} \
     --exec-prefix=${INSTALL_PATH} \
-    --with-root-dir=${INSTALL_PATH}/pacman_root 
+    --with-root-dir=${INSTALL_PATH}
 make ${PARALLEL_MAKE} install
 
 #sed -e "s|INSTALL_PATH|$INSTALL_PATH|g" ${SCRIPT_DIR}/pacman_support/pacman_sketch.conf > ${INSTALL_PATH}/etc/pacman.conf
@@ -74,12 +79,5 @@ sudo pacman -Sy
 # in root folder.
 # When installing the first package (can be any), the system will make the symlink themselves
 
-
-
-if [ ! -d ${INSTALL_PATH}/utilities ]; then
-    mkdir ${INSTALL_PATH}/utilities
-fi
-sed "s|INSTALL_PATH|$INSTALL_PATH|g" ${SCRIPT_DIR}/chinx_sed.sh > ${INSTALL_PATH}/utilities/chinx.sh
-cp ${SCRIPT_DIR}/cross_arm64.cmake ${INSTALL_PATH}/utilities/
 
 echo DONE 
