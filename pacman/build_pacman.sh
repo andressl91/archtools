@@ -1,6 +1,8 @@
 ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+# ALTER THIS FOR INSTALL OF BIN, ETC, LIB...
 INSTALL_PATH=$ROOT_DIR/aarch64
-PACMAN_PACKAGE_ROOT=$ROOT_DIR/aarch64/sysroot
+# ALTER THIS TO SET WHERE PACKAGES ARE INSTALLED
+PACMAN_PACKAGE_ROOT=$INSTALL_PATH/sysroot
 PARALLEL_MAKE=-j4
 export PATH=$INSTALL_PATH/bin:$PATH
 
@@ -25,12 +27,12 @@ cp ${ROOT_DIR}/pacman_support/makepkg_arm8.conf  ${INSTALL_PATH}/etc/makepkg.con
 tail -n 25 ${ROOT_DIR}/pacman_support/pacman_sketch.conf | \
     sed -e "s|TARGET_ROOT|$INSTALL_PATH|g" >> ${INSTALL_PATH}/etc/pacman.conf
 
+# EDIT THIS VARIABLE TP SPECIFY ARCHTECTURE (auto works if native architecture match what you want)
 sed -i -e 's/auto/aarch64/g' ${INSTALL_PATH}/etc/pacman.conf
 
 if [ ! -d ${INSTALL_PATH}/etc/pacman.d ]; then
     mkdir ${INSTALL_PATH}/etc/pacman.d
 fi
-
 
 cp ${ROOT_DIR}/pacman_support/mirrorlist ${INSTALL_PATH}/etc/pacman.d/
 sudo pacman-key --init 
