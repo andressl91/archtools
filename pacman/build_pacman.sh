@@ -4,10 +4,9 @@ INSTALL_PATH=$ROOT_DIR/aarch64
 # ALTER THIS TO SET WHERE PACKAGES ARE INSTALLED
 PACMAN_PACKAGE_ROOT=$INSTALL_PATH/sysroot
 PARALLEL_MAKE=-j4
-export PATH=$INSTALL_PATH/bin:$PATH
 
-PACMAN_VERSION=pacman-5.1.3
-if [ ! -d ${PACMAN_VERSION} ]; then
+PACMAN_VERSION=pacman-5.2.1
+if [ ! -d ${ROOT_DIR}/${PACMAN_VERSION} ]; then
     wget https://sources.archlinux.org/other/pacman/${PACMAN_VERSION}.tar.gz \
     --directory-prefix=${DEPENDENCIES_PATH} 
     tar zxf ${PACMAN_VERSION}.tar.gz
@@ -17,14 +16,24 @@ if [ ! -d ${PACMAN_PACKAGE_ROOT} ]; then
     mkdir -p $PACMAN_PACKAGE_ROOT
 fi
 
+if [ ! -d ${INSTALL_PATH}/etc ]; then
+    mkdir ${INSTALL_PATH}/etc
+fi
+
+echo INSTALL PATH: ${INSTALL_PATH}
+echo PACMAN_PACKAGE_ROOT: ${PACMAN_PACKAGE_ROOT}
 cd ${PACMAN_VERSION}
+#./configure --prefix=${INSTALL_PATH} --exec-prefix=${INSTALL_PATH} --with-root-dir=${PACMAN_PACKAGE_ROOT}
+mkdir -p ${INSTALL_PATH}/var/lib/pacman/
 ./configure --prefix=${INSTALL_PATH} \
-    --exec-prefix=${INSTALL_PATH} \
-    --with-root-dir=${PACMAN_PACKAGE_ROOT}
+            --with-root-dir=${PACMAN_PACKAGE_ROOT} 
+
 make ${PARALLEL_MAKE} install
+export PATH=$INSTALL_PATH/bin:$PATH
 
 cp ${ROOT_DIR}/pacman_support/makepkg_arm8.conf  ${INSTALL_PATH}/etc/makepkg.conf
-tail -n 25 ${ROOT_DIR}/pacman_support/pacman_sketch.conf | \
+#tail -n 25 ${ROOT_DIR}/pacman_support/pacman_sketch.conf | \
+cat ${ROOT_DIR}/pacman_support/pacman_sketch.conf | \
     sed -e "s|TARGET_ROOT|$INSTALL_PATH|g" >> ${INSTALL_PATH}/etc/pacman.conf
 
 # EDIT THIS VARIABLE TP SPECIFY ARCHTECTURE (auto works if native architecture match what you want)
@@ -37,15 +46,15 @@ fi
 cp ${ROOT_DIR}/pacman_support/mirrorlist ${INSTALL_PATH}/etc/pacman.d/
 sudo pacman-key --init 
 
-#cd ${DEPENDENCIES_PATH}
+cd ${ROOT_DIR}
 if [ ! -d archlinuxarm-keyring ]; then
     git clone https://github.com/archlinuxarm/archlinuxarm-keyring
 fi
 cd archlinuxarm-keyring
 make PREFIX=${INSTALL_PATH} install
 
-#sudo pacman-key --populate archlinuxarm
-#sudo pacman -Sy
+sudo pacman-key --populate archlinuxarm
+sudo pacman -Sy
 
 # IMPLEMENT SYMLINKING IN THIS WAY:
 # After updating database, make usr/bin, usr/lib in root, then move bin and lib to respectibly folders
