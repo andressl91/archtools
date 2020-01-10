@@ -34,6 +34,23 @@ function install_i3wm {
     cp $install_folder/i3wm/config $HOME/.config/i3
 }
 
+function install_xfce4 {
+
+    # INTEL
+    #sudo pacman -S xf86-video-intel mesa 
+    # AMD
+    #sudo pacman -S xf86-video-amdgpu mesa
+    # NVIDIA
+    #sudo pacman -S nvidia nvidia-utils
+
+    sudo pacman -S xorg xorg-server xfce4 xfce4-goodies
+    # If one wants displaymanager at login
+    sudo pacman -S lightdm lightdm-gtk-greeter
+    sudo systemctl enable lightdm
+    ############################################
+
+}
+
 ###### RICE ######
 function install_rice {
     echo RICE UP THE DESKTOP
