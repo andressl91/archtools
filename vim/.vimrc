@@ -106,6 +106,7 @@ let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 " pip install doq
 " TODO: remove plit in future, should work with system only
 let g:pydocstring_doq_path = split(system('which doq'), '\n')[0]
+let g:pydocstring_formatter = "google"
 
 " Nerdtree
 map <silent> <C-n> :NERDTreeToggle<CR>
