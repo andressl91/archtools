@@ -2,11 +2,6 @@
 
 install_folder=$(dirname $(readlink -f $0)) 
 
-######## SYSTEM #########
-sudo pacman -S openssh htop
-# Make ssh-key
-echo GENERATE SSH-KEY
-ssh-keygen -t rsa -b 4096
 sudo pacman -S python ipython python-virtualenv 
 
 # COPY XORG CONFIG FILE TO HOMEFOLDER
@@ -49,7 +44,6 @@ function install_xfce4 {
     sudo pacman -S lightdm lightdm-gtk-greeter
     sudo systemctl enable lightdm
     ############################################
-
 }
 
 ###### RICE ######
@@ -81,10 +75,6 @@ function install_bash_config {
     echo COPYING BASHRC CONFIG FILE
     cp $install_folder/bash/.bashrc $HOME/
 }
-
-
-######## INSTALL FIREFOX #######3
-sudo pacman -S firefox
 
 ######## PRIVACY #########
 # VPN and macchanger

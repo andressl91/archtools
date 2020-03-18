@@ -12,6 +12,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
+Plugin 'heavenshell/vim-pydocstring'
 Plugin 'valloric/youcompleteme'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
@@ -99,6 +100,10 @@ let g:ycm_extra_conf_vim_data = [
   \  'g:ycm_python_sys_path'
   \]
 let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
+
+" Plugin vim-pydocstring
+" Find doq in current path, install to virtualenv
+let g:pydocstring_doq_path = split(system('which doq'), '\n')[0]
 
 " Nerdtree
 map <silent> <C-n> :NERDTreeToggle<CR>
