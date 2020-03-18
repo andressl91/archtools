@@ -104,6 +104,7 @@ let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 " Plugin vim-pydocstring
 " Find doq in current path, install to virtualenv if not not there
 " pip install doq
+" TODO: remove plit in future, should work with system only
 let g:pydocstring_doq_path = split(system('which doq'), '\n')[0]
 
 " Nerdtree
