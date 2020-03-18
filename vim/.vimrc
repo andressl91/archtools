@@ -102,7 +102,8 @@ let g:ycm_extra_conf_vim_data = [
 let g:ycm_global_ycm_extra_conf = '~/global_extra_conf.py'
 
 " Plugin vim-pydocstring
-" Find doq in current path, install to virtualenv
+" Find doq in current path, install to virtualenv if not not there
+" pip install doq
 let g:pydocstring_doq_path = split(system('which doq'), '\n')[0]
 
 " Nerdtree
