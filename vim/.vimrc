@@ -18,6 +18,8 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plugin 'vim-airline/vim-airline'
+Plugin 'tpope/vim-fugitive'
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
 
