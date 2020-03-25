@@ -58,6 +58,7 @@ function install_rice {
 
 function sound {
     sudo pacman -S alsa-utils 
+    sudo pacman -S pavucontrol # NICE INTERFACE FOR CONTROL SOUND
     # Now run alasmixer
 
 }
