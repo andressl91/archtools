@@ -51,8 +51,8 @@ function install_rice {
     echo RICE UP THE DESKTOP
     sudo pacman -S feh imagemagick python-pip python-pywal
     mkdir -p $HOME/Pictures/Wallpaper
-    cp $install_folder/rice/space.png $HOME/Pictures/Wallpaper
-    echo NOW RUN: wal -i ~/Pictures/leet.jpg --saturate 0.9 -q
+    cp $install_folder/rice/space2.png $HOME/Pictures/Wallpaper
+    echo NOW RUN: wal -i ~/Pictures/space2.jpg --saturate 0.9 -q
 
 }
 

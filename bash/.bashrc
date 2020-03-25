@@ -125,6 +125,9 @@ mcd () {
   cd $1
 }
 
+#wal -i space3.jpg  --saturate 0.4 -q
+wal -i ~/Pictures/Wallpaper/space3.jpg  -q
+
 setxkbmap -layout us -variant altgr-intl
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
