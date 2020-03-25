@@ -18,7 +18,15 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plugin 'tpope/vim-fugitive'
+Plugin 'DoxygenToolkit.vim'
+
+
+" Keeping sessions TODO: Look into this, interesting
+Plugin 'tpope/vim-obsession'
+Plugin 'dhruvasagar/vim-prosession'
+Plugin 'gikmx/ctrlp-obsession'
+
+
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
 
@@ -116,6 +124,15 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 " Custom key binding
 :nnoremap <F5> :rightb vert term<CR>>
+
+" Doxygen
+let g:DoxygenToolkit_briefTag_pre="@synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@param "
+let g:DoxygenToolkit_returnTag="@returns   "
+let g:DoxygenToolkit_blockHeader="-------------------------------"
+let g:DoxygenToolkit_blockFooter="-------------------------------"
+let g:DoxygenToolkit_authorName="Mathias Lorente"
+let g:DoxygenToolkit_licenseTag="My own license" " <-- !!! Does not end with "\<enter>"
 
 
 
