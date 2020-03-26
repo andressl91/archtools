@@ -20,6 +20,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plugin 'DoxygenToolkit.vim'
 
+" Snippets
+Plugin 'SirVer/ultisnips'
+
 
 " Keeping sessions TODO: Look into this, interesting
 Plugin 'tpope/vim-obsession'
@@ -134,5 +137,9 @@ let g:DoxygenToolkit_blockFooter="-------------------------------"
 let g:DoxygenToolkit_authorName="Mathias Lorente"
 let g:DoxygenToolkit_licenseTag="My own license" " <-- !!! Does not end with "\<enter>"
 
-
+" Ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
