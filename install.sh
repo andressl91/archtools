@@ -17,6 +17,8 @@ function install_vim {
     echo COPYING OLD-HOPE COLOR TO VIM CONFIG
     cp -rf $install_folder/vim/autoload $HOME/.vim/
     cp -rf $install_folder/vim/colors $HOME/.vim/
+    cp -rf $install_folder/vim/UltiSnips $HOME/.vim/
+
     vim +PluginInstall +qall
     youcompleteme_install=$HOME/.vim/bundle/youcompleteme/install.py
     # IF NOT C++ needed install with  python $youcompleteme_install
