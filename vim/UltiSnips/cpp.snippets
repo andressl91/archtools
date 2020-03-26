@@ -34,6 +34,7 @@ endsnippet
 #Cout
 snippet cout "std::cout"
 std::cout << ${1:} << std::endl;
+$2
 endsnippet
 
 
@@ -138,6 +139,13 @@ struct $1 {
 endsnippet
 
 ## Functions
+
+snippet func "Basic func"
+${1:void} ${2:my_function}(${3:}) {
+$4
+}
+endsnippet
+
 snippet main "create basic main function"
 int main(int argc, char** argv) {
 	$1

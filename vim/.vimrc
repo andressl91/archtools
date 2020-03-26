@@ -139,7 +139,23 @@ let g:DoxygenToolkit_licenseTag="My own license" " <-- !!! Does not end with "\<
 
 " Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" NOTE!! <c-s> ONLY WORKS IF "stty -ixon" is set in bashrc, to enable, else
+" temrinal freese
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"  let g:UltiSnipsExpandTrigger="<c-s>"
+"  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+
+
+
+
+
 
