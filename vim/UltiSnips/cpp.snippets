@@ -1,4 +1,3 @@
-
 ######## STL ########
 # Includes
 snippet inc "include iostream"
@@ -43,26 +42,32 @@ endsnippet
 
 snippet sp "shared_ptr"
 std::shared_ptr<${1:T}> ${2};
+$3
 endsnippet
 
 snippet msp "Make shared_ptr"
 std::shared_ptr<${1}> ${2} = std::make_shared<$1>(${3});
+$4
 endsnippet
 
 snippet amsp "Auto make shared_ptr"
 auto ${1} = std::make_shared<${2}>(${3});
+$4
 endsnippet
 
 snippet up "unique_ptr"
 std::unique_ptr<${1:T}> ${2};
+$3
 endsnippet
 
 snippet mup "Make unique_ptr"
 std::unique_ptr<${1}> ${2} = std::make_unique<$1>(${3});
+$4
 endsnippet
 
 snippet amup "Auto make unique_ptr"
 auto ${1} = std::make_unique<${2}>(${3});
+$4
 endsnippet
 
 ## STL Containers
@@ -74,12 +79,13 @@ endsnippet
 
 snippet vec "define STL vector, default T"
 std::vector<${1:T}> $2 = $3
-$3
+$4
 endsnippet
 
 # Map
 snippet strmap "STL map, default T"
 std::map<${1:std::string}, ${2:T}> $3;
+$4
 endsnippet
 
 snippet map "STL map, default T"
@@ -108,16 +114,19 @@ endsnippet
 # Includes
 snippet bi "include memory"
 #include <boost/${1:}}>
+$2
 endsnippet
 
 
 ## Structs
-snippet bstuct
+snippet bstruct
 struct $1 {
 	
-	$1()
+	$1();
 
 };
+
+$2
 endsnippet
 
 ## Structs
@@ -131,11 +140,13 @@ $2
 endsnippet
 
 # Templated Struct
-snippet temp "Template function"
+snippet tempstruct "Template function"
 template <typename ${1:T}>
 struct $1 {
 	$1() = default();
 };
+
+$2
 endsnippet
 
 ## Functions
