@@ -94,6 +94,10 @@ function install_privacy_tools {
     echo down-pre
 }
 
+function nvidia {
+    sudo pacman -S nvidia --noconfirm
+    systemctl enable nvidia-persistenced
+}
 install_vim
 install_i3wm
 install_sound
