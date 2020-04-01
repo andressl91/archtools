@@ -2,7 +2,7 @@
 
 install_folder=$(dirname $(readlink -f $0)) 
 
-sudo pacman -S python ipython python-virtualenv 
+sudo pacman -S python ipython python-virtualenv wget
 
 # COPY XORG CONFIG FILE TO HOMEFOLDER
 cp ${install_folder}/xorg/.xinitrc $HOME
