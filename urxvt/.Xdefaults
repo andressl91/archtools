@@ -11,6 +11,9 @@ URxvt.scrollBar_right: false
 URxvt.saveLines: 5000
 URxvt.transparent: true
 
+# For shadowing
+URxvt.shading: 30
+
 !! Pearl extensions
 URxvt.perl-lib: /home/jackal/.urxvt/etx
 URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,font-size, fullscreen

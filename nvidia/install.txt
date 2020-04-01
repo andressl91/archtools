@@ -1,7 +1,7 @@
 # FIRST!!! DISABLE NOUVEAU 
 
 # install nvidia driver following arch wiki
-# Rember to start daemon nvidia-persistance
+# Rember to enable daemon nvidia-persistenced
 
 If you are using hashcat, remember to install cuda!
 
