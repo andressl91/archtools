@@ -1,0 +1,7 @@
+grub-install --target=x86_64-efi --efi-directory=/boot/ --bootloader-id=GRUB
+
+IF OTHER OS ON SYSTEM:
+1. Install os-prober
+2. mount up boot partition of other os to somewhere on root, mount /dev/sda1 /mnt2
+
+grub-mkconfig -o /boot/grub/grub.cfg
