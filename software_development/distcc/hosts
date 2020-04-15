@@ -1,0 +1,12 @@
+# --- /etc/distcc/hosts -----------------------
+# See the "Hosts Specification" section of
+# "man distcc" for the format of this file.
+#
+# By default, just test that it works in loopback mode.
+192.168.20.11:3632/14 localhost
+
+# HERE
+# - 192.168.20.11:3632 is HOST/PORT
+# - /14 MEANS HOW MANY JOBS ONE CAN SEND TO HOST
+
+
