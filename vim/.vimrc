@@ -129,12 +129,12 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 :nnoremap <F5> :rightb vert term<CR>>
 
 " Doxygen
-let g:DoxygenToolkit_briefTag_pre="@synopsis  "
+let g:DoxygenToolkit_briefTag_pre="@brief  "
 let g:DoxygenToolkit_paramTag_pre="@param "
 let g:DoxygenToolkit_returnTag="@returns   "
-let g:DoxygenToolkit_blockHeader="-------------------------------"
-let g:DoxygenToolkit_blockFooter="-------------------------------"
-let g:DoxygenToolkit_authorName="Mathias Lorente"
+let g:DoxygenToolkit_blockHeader=""
+let g:DoxygenToolkit_blockFooter=""
+let g:DoxygenToolkit_authorName="Andreas Slyngstad"
 let g:DoxygenToolkit_licenseTag="My own license" " <-- !!! Does not end with "\<enter>"
 
 " Ultisnips

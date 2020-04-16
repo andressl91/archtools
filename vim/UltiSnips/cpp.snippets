@@ -70,6 +70,11 @@ auto ${1} = std::make_unique<${2}>(${3});
 $4
 endsnippet
 
+snippet wp "weak_ptr"
+std::weak_ptr<${1:T}> ${2}(${3});
+endsnippet
+
+
 ## STL Containers
 # Vector
 snippet dvec "declare STL vector, default T"
@@ -92,6 +97,15 @@ snippet map "STL map, default T"
 std::map<${1:Key}, ${2:T}> $3;
 $4
 endsnippet
+
+# Tuple
+snippet tuple "STL tuple"
+std::tuple<$1> $2;
+endsnippet
+
+snippet mtuple "STL tuple"
+auto ${1:Foo} = std::make_tuple($3);
+endsnippet
 ##
 
 ## STL Algorithms
@@ -99,6 +113,15 @@ snippet find "STL find"
 auto find_res = std::find(${1:}.begin(), $1.end(), $2);
 endsnippet
 
+##
+
+## STL lambda
+snippet lambda "lambda"
+auto $1 = [$2]($3) {
+	$4
+};
+$5
+endsnippet
 ##
 
 ### Template
@@ -119,19 +142,33 @@ endsnippet
 
 
 ## Structs
-snippet bstruct
+snippet struct
 struct $1 {
 	
 	$1();
-
 };
 
 $2
 endsnippet
 
-## Structs
-snippet sfoo "FooStruct"
+snippet movestruct "Struct skelton for move only"
 struct $1 {
+	
+	$1();
+	$1(const $1& other) = delete;
+	$1& operator=($1& other) = delete;
+
+	$1($1&& other);
+	$1& operator=($1&& other) {
+		return *this;
+	}
+};
+
+$2
+endsnippet
+
+snippet sfoo "FooStruct"
+struct ${1:Foo} {
 	int x;
 	$1(int i) : x{i} {} 
 };
@@ -153,11 +190,19 @@ endsnippet
 
 snippet func "Basic func"
 ${1:void} ${2:my_function}(${3:}) {
-$4
+	$4
+}
+endsnippet
+
+snippet vf "void function"
+void ${1:my_function}(${2:}) {
+	$3
 }
 endsnippet
 
 snippet main "create basic main function"
+$2
+
 int main(int argc, char** argv) {
 	$1
 	return 0;
