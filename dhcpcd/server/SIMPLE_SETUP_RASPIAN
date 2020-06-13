@@ -1,0 +1,37 @@
+apt-get install isc-dhcp-server
+
+# Make sure interface is set to be used in 
+# - /etc/default/isc-dhcp-server -> INTERFACESv4
+
+# EDIT /etc/dhcp/dhcpd.conf, ADD TO THE BOTTOM
+# Simple setup
+# ##########################3
+subnet 192.168.20.0 netmask 255.255.255.0 {
+  range 192.168.20.60 192.168.20.70;
+  option routers 192.168.20.1;
+  option domain-name-servers 8.8.8.8;
+}
+##############################3
+# Can also set global vals, so we dont have to specify mutch
+# in subnet brackets
+default-lease-time 600; #How long and IP-addr is leased to requesting client, here 10 minutes
+max-lease-time 7200; #Max how long a client can keep assign IP-addr by DHCP-server, without applying for renewal,  here 2 hours
+
+option domain-name "cosmos.all"; #Default domain of the network
+option domain-name-servers 192.168.1.1, 192.168.1.2;
+option broadcast-address 192.168.1.255;
+option routers 192.168.1.254;
+option subnet-mask 255.255.255.0;
+
+subnet 192.168.1.0 netmask 255.255.255.0
+ {
+  range 192.168.1.10 192.168.1.20;
+  range 192.168.1.100 192.168.1.200;
+ }
+###################################
+
+# If someone need special treatment
+host someclient {
+ hardware ethernet MAC_ADDRESS;
+ fixed-address 192.168.20.88; # Can be inside range defined in subnet, but will give warning in journalctl, maby specify a IP outside is better.
+}
