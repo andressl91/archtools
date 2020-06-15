@@ -1,0 +1,4 @@
+Some wifi will aithenticate but fail on dhcpcd request for ip
+upate tch wpa_supplicant call with: wpa_supplicant -Dwext
+Disables FUBAR driver
+example: wpa_supplicant -c /etc/wpa_supplicant/wpa_supplicant.conf -Dwext -i wlan0
