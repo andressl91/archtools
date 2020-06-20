@@ -1,0 +1,31 @@
+TABLES:
+#3 main tables
+- Filter (default main table), decide of packet will go to requested destination
+- Nat (network address translation), modify packet source/desination 
+- Mangle (alter IP header of packets)
+
+# Not the main tables
+- Raw, connection tracking
+- Security (for SElinux security tables)
+
+
+CHAINS:
+# 5 type of chains
+- Pre-routing, before taking any routing decition
+- Input, packet originated outside system coming in
+- Forward, route package through your system
+- Output, packed originated from system going out
+- Post-routing, outgoung/forwarding after routing decition is made, 
+  last sted before putting the packed "on the wire".
+
+Travelsal order of packets:
+* Incoming packets destined for current system: PREROUTING -> INPUT
+* Incoming packets destined for another host: PREROUTING -> FORWARD -> POSTROUTING
+* Locally generated packets: OUTPUT -> POSTROUTING
+
+
+
+RULES:
+- Matching component, (-s 192.168.20.10 example source packed)
+- Target component (what happens when match is made, -j DROP).
+
