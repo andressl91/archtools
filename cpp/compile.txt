@@ -1,3 +1,0 @@
-$DEPS = Path to root for include, lib of dlib
-g++ brigde_custom_object.cpp -o brigde -I $DEPS/include -L $DEPS/lib -ldlib
-

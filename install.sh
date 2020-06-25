@@ -87,7 +87,7 @@ function install_bash_config {
 # VPN and macchanger
 function install_privacy_tools {
     sudo pacman -S openresolv openvpn macchanger --noconfirm
-    sudo cp ${install_folder}/openvpn/update-resolv-conf /etc/openvpn/
+    sudo cp ${install_folder}/network/openvpn/update-resolv-conf /etc/openvpn/
     echo ADD FOLLOWING IN OPENVPN client.conf
     echo script-security 2
     echo up /etc/openvpn/update-resolv-conf.sh
