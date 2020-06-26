@@ -1,0 +1,2 @@
+#Create serviceuser with nologin shell, helps remote exploit to get shell
+useradd serviceuser -r -s /sbin/nologin
