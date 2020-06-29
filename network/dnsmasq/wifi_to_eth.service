@@ -1,0 +1,11 @@
+[Unit]
+Description=Bridge betweel wifi and dhcp-server on wired network
+After=network.target dnsmasq.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/pi/wifi_to_eth.sh
+
+[Install]
+WantedBy=multi-user.target
+

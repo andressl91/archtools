@@ -30,7 +30,7 @@ function install_vim {
 # WINDOW MANAGER i3-wm
 function install_i3wm {
     echo COPY i3 CONFIG TO HOME DIRECTORY
-    sudo pacman -S i3-gaps
+    sudo pacman -S i3-wm i3status --noconfirm
     cp $install_folder/i3wm/config $HOME/.config/i3/config
 }
 
