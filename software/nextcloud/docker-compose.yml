@@ -1,0 +1,32 @@
+version: "2"
+services:
+  nextcloud:
+    image: linuxserver/nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Oslo
+    volumes:
+      - /srv/nextcloud/config:/config
+      - /srv/nextcloud/data:/data
+    ports:
+      - 443:443
+    restart: unless-stopped
+  mariadb:
+    image: linuxserver/mariadb
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=dimmuborgir
+      - TZ=Europe/Oslo
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=dimmuborgir
+    volumes:
+      - /srv/mariadb/config:/config
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+
