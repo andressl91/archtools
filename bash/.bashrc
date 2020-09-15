@@ -131,6 +131,7 @@ create_ccache () {
     mkdir ${CCACHE_BASEDIR}
     export CCACHE_DIR=${CCACHE_BASEDIR}
     ccache -s
+    export PATH=/usr/lib/ccache/bin:$PATH
 }
 
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals: FOR VIM
