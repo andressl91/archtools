@@ -128,7 +128,7 @@ mcd () {
 # Software development
 create_ccache () {
     CCACHE_BASEDIR=${PWD}/ccache
-    mkdir ${CCACHE_BASEDIR}
+    mkdir -p ${CCACHE_BASEDIR}
     export CCACHE_DIR=${CCACHE_BASEDIR}
     ccache -s
     export PATH=/usr/lib/ccache/bin:$PATH
