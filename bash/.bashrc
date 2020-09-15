@@ -124,6 +124,15 @@ mcd () {
   mkdir -p $1
   cd $1
 }
+
+# Software development
+create_ccache () {
+    CCACHE_BASEDIR=${PWD}/ccache
+    mkdir ${CCACHE_BASEDIR}
+    export CCACHE_DIR=${CCACHE_BASEDIR}
+    ccache -s
+}
+
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals: FOR VIM
 stty -ixon
 
